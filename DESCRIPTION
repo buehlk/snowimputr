@@ -1,0 +1,11 @@
+Package: snowimputr
+Type: Package
+Title: Snowball bootstrap imputation of deleted Telegram messages
+Version: 0.1.0
+Author: Kilian Buehling
+Maintainer: Kilian Buehling <kilian.buehling@fu-berlin.de>
+Description: This package includes convenient functions to identify deleted messages in Telegram datasets using the consecutive numbering of message IDs when Telegram data is scraped via the Telethon API. Those IDs are then queried in the overall dataset to reconstruct the original message history of the dataset.
+License: MIT 
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
