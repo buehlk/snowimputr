@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# snowimputr
+# Snowball bootstrap imputation of Telegram data with snowimputr
 
 This package includes convenient functions to identify deleted messages
 in Telegram datasets using the consecutive numbering of message IDs when
