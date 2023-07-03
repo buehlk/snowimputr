@@ -21,11 +21,8 @@ This package includes convenient functions to identify deleted messages in Teleg
 
 You can install snowimputr from GitHub with:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("buehlk/snowimputr")
-```
-```{r}
+
+```{r echo = FALSE}
 # install.packages("devtools")
 devtools::install_github("buehlk/snowimputr")
 
