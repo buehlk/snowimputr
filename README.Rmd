@@ -45,8 +45,8 @@ telegram_data <- data.frame(
                                c(rep(NA, 4), "111111", "333333"), rep(NA, 6)),
  Forwarded_from_message_ID = c(2, 3, 1, rep(NA, 7), 5, 2, rep(NA, 6)),
  Message_content = c(
-   c(rep("The original message is deleted, but available via bootstrap snowball imputation.", 3), rep("This is an organic message.", 3)),
-   c(rep("This is an organic message.", 4), rep("The original message is deleted, but available via bootstrap snowball imputation.", 2)),
+   c(rep("Forwarded. Rriginal message is deleted, but available via snowball bootstrap imputation.", 3), rep("This is an organic message.", 3)),
+   c(rep("This is an organic message.", 4), rep("Forwarded. Original message is deleted, but available via snowball bootstrap imputation.", 2)),
    rep("This is an organic message.", 6)
  )
  )
