@@ -20,7 +20,7 @@
 #' Forwarded_from_message_ID = c(2, 3, 1, rep(NA, 7), 5, 2, rep(NA, 6)),
 #' Message_content = c(
 #'   c(rep("The original message is deleted, but available via bootstrap snowball imputation.", 3), rep("This is an organic message.", 3)),
-#'   c(rep("This is an organic message.", 4), rep("The original message is deleted, but available via bootstrap snowball imputation."), 2),
+#'   c(rep("This is an organic message.", 4), rep("The original message is deleted, but available via bootstrap snowball imputation.", 2)),
 #'   rep("This is an organic message.", 6)
 #' )
 #' )
@@ -30,38 +30,8 @@
 #' channel_ID_colname = "Channel_ID",
 #' message_ID_colname = "Message_ID",
 #' target_entity = "333333")
-#'
-#' # Find the messages in the dataset that were deleted in "333333" but forwarded in other channels
-#' find_deleted_msg(
-#' corpus_df = telegram_data,
-#' deleted_msg_ids = deleted$Message_ID,
-#' deleted_channel_ids = deleted$Channel_ID,
-#' fwd_from_colname = "Forwarded_from_channel_ID",
-#' fwd_msg_colname = "Forwarded_from_message_ID"
-#' )
-#'
-#' # In case the same message is found several times show only the oldest
-#' find_deleted_msg(
-#' corpus_df = telegram_data,
-#' deleted_msg_ids = deleted$Message_ID,
-#' deleted_channel_ids = deleted$Channel_ID,
-#' fwd_from_colname = "Forwarded_from_channel_ID",
-#' fwd_msg_colname = "Forwarded_from_message_ID",
-#' date_colname = "Date", return_result = "oldest"
-#' )
-#'
-#' # Show only the oldest and conveniently impute the original channel ID and message ID
-#' find_deleted_msg(
-#' corpus_df = telegram_data,
-#' deleted_msg_ids = deleted$Message_ID,
-#' deleted_channel_ids = deleted$Channel_ID,
-#' fwd_from_colname = "Forwarded_from_channel_ID",
-#' fwd_msg_colname = "Forwarded_from_message_ID",
-#' date_colname = "Date", return_result = "oldest",
-#' message_ID_colname = "Message_ID",
-#' channel_ID_colname = "Channel_ID",
-#' impute = TRUE
-#' )
+#' }
+
 #' @rdname list_deleted_msg
 #' @export
 #' @import pbapply

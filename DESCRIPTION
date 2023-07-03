@@ -8,4 +8,5 @@ Description: This package includes convenient functions to identify deleted mess
 License: MIT 
 Encoding: UTF-8
 LazyData: true
+Imports: data.table, dplyr, magrittr, pbapply
 RoxygenNote: 7.2.3
