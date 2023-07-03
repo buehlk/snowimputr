@@ -45,14 +45,16 @@ telegram_data <- data.frame(
                                c(rep(NA, 4), "111111", "333333"), rep(NA, 6)),
  Forwarded_from_message_ID = c(2, 3, 1, rep(NA, 7), 5, 2, rep(NA, 6)),
  Message_content = c(
-   c(rep("Forwarded. Rriginal message is deleted, but available via snowball bootstrap imputation.", 3), rep("This is an organic message.", 3)),
+   c(rep("Forwarded. Original message is deleted, but available via snowball bootstrap imputation.", 3), rep("This is an organic message.", 3)),
    c(rep("This is an organic message.", 4), rep("Forwarded. Original message is deleted, but available via snowball bootstrap imputation.", 2)),
    rep("This is an organic message.", 6)
  )
  )
 
 flextable::flextable(telegram_data) %>% 
-  flextable::align(align = "center") %>% 
+  flextable::align(align = "center") %>%
+  flextable::width(j = 6, width = 7, unit = "cm") %>% 
+  flextable::fontsize(15) %>% 
   plot()
 
 ```
