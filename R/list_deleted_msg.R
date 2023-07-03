@@ -62,12 +62,14 @@
 #' channel_ID_colname = "Channel_ID",
 #' impute = TRUE
 #' )
+#' @rdname list_deleted_msg
+#' @export
 #' @import pbapply
 #' @import data.table
 #' @import dplyr
 #' @import magrittr
 #' @importFrom  dplyr %>%
-#' @export
+
 list_deleted_msg <- function(msg_df, channel_ID_colname, message_ID_colname, target_entity = "") {
   messageID_stats <- msg_df %>%
     dplyr::filter(
