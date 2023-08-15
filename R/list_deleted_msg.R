@@ -6,6 +6,7 @@
 #' @param channel_ID_colname The column name of the channel ID in `msg_df`.
 #' @param message_ID_colname The column name of the message ID in `msg_df`.
 #' @param target_entity Channel ID of channel for which deleted messages should be searched. (optional). If none is chosen, all deleted messages in the dataset are searched.
+#' @param truncated This option should be chosen in case only a part of the channels' message history was scraped.If FALSE, the first message ID is assumed to be 1, if TRUE the minimum message ID constitutes the first message. Default: FALSE. 
 #' @return A data frame with deleted channel IDs and their corresponding deleted message IDs.
 #' @examples
 #' \dontrun{
@@ -40,8 +41,9 @@
 #' @import magrittr
 #' @importFrom  dplyr %>%
 
-list_deleted_msg <- function(msg_df, channel_ID_colname, message_ID_colname, target_entity = "") {
+list_deleted_msg <- function(msg_df, channel_ID_colname, message_ID_colname, target_entity = "", truncated = FALSE) {
   messageID_stats <- msg_df %>%
+    dplyr::mutate(numeric_message_id = as.numeric(.data[[message_ID_colname]])) %>% 
     dplyr::filter(
       dplyr::case_when(
         .data[[channel_ID_colname]] == target_entity ~ nchar(target_entity) > 0,
@@ -50,13 +52,14 @@ list_deleted_msg <- function(msg_df, channel_ID_colname, message_ID_colname, tar
     ) %>%
     dplyr::group_by(.data[[channel_ID_colname]]) %>%
     dplyr::summarize(
-      minID = min(.data[[message_ID_colname]]),
-      maxID = max(.data[[message_ID_colname]])
+      minID = min(numeric_message_id),
+      maxID = max(numeric_message_id)
     ) %>%
     dplyr::rename(channel_ID = .data[[channel_ID_colname]])
-
+  
   lapply(1:length(messageID_stats$channel_ID), missing_ids_helper,
          id_stats = messageID_stats, msg_df = msg_df,
-         message_ID = message_ID_colname, channel_ID = channel_ID_colname) %>%
+         message_ID = message_ID_colname, channel_ID = channel_ID_colname,
+         truncated = truncated) %>%
     do.call(rbind, .)
 }

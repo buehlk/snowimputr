@@ -7,6 +7,7 @@
 #' @param msg_df A data frame containing messages.
 #' @param channel_ID The column name of the channel ID in `msg_df`.
 #' @param message_ID The column name of the message ID in `msg_df`.
+#' @param truncated This option should be chosen in case only a part of the channels' message history was scraped.If FALSE, the first message ID is assumed to be 1, if TRUE the minimum message ID constitutes the first message. Default: FALSE. 
 #' @return A data frame with missing channel IDs and their corresponding missing message IDs.
 #' @import pbapply
 #' @import data.table
@@ -14,9 +15,12 @@
 #' @importFrom  dplyr %>%
 #' @import magrittr
 #' @export
-missing_ids_helper <- function(x, id_stats, msg_df, channel_ID, message_ID) {
+missing_ids_helper <- function(x, id_stats, msg_df, channel_ID, message_ID, truncated) {
+  if(truncated == FALSE){
+    id_stats$minID <- 1
+  }
   channel_id <- id_stats$channel_ID[x]
-  all_ids <- 1:id_stats$maxID[which(id_stats$channel_ID == channel_id)]
+  all_ids <- id_stats$minID[which(id_stats$channel_ID == channel_id)]:id_stats$maxID[which(id_stats$channel_ID == channel_id)]
   existing_ids <- msg_df %>%
     dplyr::filter(.data[[channel_ID]] == channel_id) %>%
     dplyr::select(all_of(message_ID)) %>%
