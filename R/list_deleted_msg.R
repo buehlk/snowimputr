@@ -42,7 +42,7 @@
 #' @importFrom  dplyr %>%
 
 list_deleted_msg <- function(msg_df, channel_ID_colname, message_ID_colname, target_entity = "", truncated = FALSE) {
-  messageID_stats <- msg_df %>%
+  messageID_stats <- as.data.table(msg_df) %>%
     dplyr::mutate(numeric_message_id = as.numeric(.data[[message_ID_colname]])) %>% 
     dplyr::filter(
       dplyr::case_when(
@@ -58,7 +58,7 @@ list_deleted_msg <- function(msg_df, channel_ID_colname, message_ID_colname, tar
     dplyr::rename(channel_ID = .data[[channel_ID_colname]])
   
   lapply(1:length(messageID_stats$channel_ID), missing_ids_helper,
-         id_stats = messageID_stats, msg_df = msg_df,
+         id_stats = messageID_stats, msg_df = as.data.table(msg_df),
          message_ID = message_ID_colname, channel_ID = channel_ID_colname,
          truncated = truncated) %>%
     do.call(rbind, .)
